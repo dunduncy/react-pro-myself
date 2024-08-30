@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// useReducer
+import { useReducer } from 'react';
+// 1、定义reducer函数 根据不同的action返回不同的状态
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INC':
+      return state + 1
+    case 'DEC':
+      return state - 1
+    default:
+      return state
+  }
+}
+// 2、组件中调用useReducer(reducer,0)=>[state,dispatch]
+
+// 3、调用dispatch({type:'INC'})=>通知reducer产生一个新的状态 使用这个新状态更新UI
 
 function App() {
+  const [state,dispatch] = useReducer(reducer,0)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      this is App
+      {state}
+      <button onClick={()=>dispatch({type:'INC'})}>+</button>
+      <button onClick={()=>dispatch({type:'DEC'})}>-</button>
     </div>
   );
 }
