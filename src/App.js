@@ -7,6 +7,8 @@ function reducer(state, action) {
       return state + 1
     case 'DEC':
       return state - 1
+    case 'SET':
+      return action.payload
     default:
       return state
   }
@@ -16,13 +18,16 @@ function reducer(state, action) {
 // 3、调用dispatch({type:'INC'})=>通知reducer产生一个新的状态 使用这个新状态更新UI
 
 function App() {
-  const [state,dispatch] = useReducer(reducer,0)
+  const [state, dispatch] = useReducer(reducer, 0)
   return (
     <div className="App">
       this is App
+      <button onClick={() => dispatch({ type: 'INC' })}>+</button>
       {state}
-      <button onClick={()=>dispatch({type:'INC'})}>+</button>
-      <button onClick={()=>dispatch({type:'DEC'})}>-</button>
+      <button onClick={() => dispatch({ type: 'DEC' })}>-</button>
+
+      <button onClick={() => dispatch({ type: 'SET', payload:100 })}>update</button>
+
     </div>
   );
 }
